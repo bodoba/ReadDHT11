@@ -23,7 +23,7 @@ project (ReadDHT11)
 find_library(LIB_MQTT mosquitto)
 find_library(LIB_WIRING wiringPi)
 
-set (CMAKE_C_FLAGS "-Wall -std=gnu11 -g)
+set (CMAKE_C_FLAGS "-Wall -std=gnu11 -g")
 
 # all executables end up in bin
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
