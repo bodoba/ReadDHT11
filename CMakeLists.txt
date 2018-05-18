@@ -31,7 +31,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 add_executable(ReadDHT11 ReadDHT11.c DHT11.c MQTT.c)
 
-target_link_libraries(rpisensorclient "${LIB_MQTT}")
-target_link_libraries(rpisensorclient "${LIB_WIRING}")
+target_link_libraries(ReadDHT11 "${LIB_MQTT}")
+target_link_libraries(ReadDHT11 "${LIB_WIRING}")
 
 install(TARGETS ReadDHT11 DESTINATION bin)
