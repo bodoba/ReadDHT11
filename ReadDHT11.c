@@ -81,11 +81,13 @@ int main(void)
                 int  count = 0;
                 while(count++ < MAX_TRIES && success == false)
                 {
-                    uint8_t humidity, celcius;
-                    if ( dht11_read_val( DHT11_PIN, &humidity, &celcius) == DHT11_OK ) {
+                    uint8_t humidity, celcius, dht11;
+                    dht11=dht11_read_val( DHT11_PIN, &humidity, &celcius);
+                    if (  dht11 == DHT11_OK ) {
                         sprintf(msg,"{\"Humidity\":\"%d\",\"Temperature\":\"%d\"}", humidity, celcius );
                         success=true;
                     } else {
+                        fprintf(stderr, "Error: DHT11 return value: %d\n", dht11);
                         delay(1500);
                     }
                 }
