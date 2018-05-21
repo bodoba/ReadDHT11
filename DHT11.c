@@ -53,13 +53,10 @@ int8_t dht11_read_val( uint8_t pin, uint8_t *humidity, uint8_t *celcius ) {
     pinMode(pin, INPUT);
     
     if ( dht11_get_pulse(pin) == DHT11_OK ) {       // got ackknowledgement?
-        
         for (int i=0; i<40; i++) {                  // read 5 bites (40bits)
             retval=dht11_get_pulse(pin);
             if ( retval >= 0  ) {                   // timeout?
-                if ( retval > 0 ) {
-                    bits[idx] |= (1 << cnt);
-                }
+                if ( retval > 0 ) bits[idx] |= (1 << cnt);
                 if (cnt == 0) {                     // next byte?
                     cnt = 7;                        // restart at MSB
                     idx++;                          // next byte!
@@ -71,16 +68,12 @@ int8_t dht11_read_val( uint8_t pin, uint8_t *humidity, uint8_t *celcius ) {
             }
         }
         if ( bits[4] == (bits[0] + bits[2])) {      // calcutalate checksum
-            if ( humidity ) {
-                *humidity = bits[0];
-            }
-            if ( celcius ) {
-                *celcius  = bits[2];
-            }
+            if ( humidity ) *humidity = bits[0];
+            if ( celcius )  *celcius  = bits[2];
             retval = DHT11_OK;
         } else {
             retval = DHT11_ERROR_CHECKSUM;
         }
-        return retval;
     }
+    return retval;
 }
