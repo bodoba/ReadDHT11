@@ -30,7 +30,7 @@ int8_t dht11_get_pulse( uint8_t pin ) {
     
     while(digitalRead(pin) == LOW && loopCnt--);
     if ( loopCnt > 0 ) {
-        lowcnt = loopCnt;
+        lowcnt  = loopCnt;
         loopCnt = 1000000;
         uint32_t t = micros();
         while(digitalRead(pin) == HIGH && loopCnt--);
