@@ -41,7 +41,7 @@ int8_t dht11_get_pulse( uint8_t pin ) {
             retval = (lng > 40) ? 1 : 0;
         }
     }
-    printf("P: %llu L %llu H %u %d\n", lowcnt, highcnt, lng, retval);
+    printf("P: %lu L %lu H %u %d\n", lowcnt, highcnt, lng, retval);
     return retval;
 }
 
