@@ -35,7 +35,7 @@ int8_t dht11_get_pulse( uint8_t pin ) {
             retval = ((micros() - t) > 40) ? 1 : 0;
         }
     }
-    printf("pulse: ", retval);
+    printf("pulse: %d\n", retval);
     return retval;
 }
 
