@@ -22,18 +22,21 @@
 
 #include "DHT11.h"
 
+#define DHT11_PULSE_TIMEOUT 10000
+
 int8_t dht11_get_pulse( uint8_t pin ) {
-    int8_t   retval = DHT11_ERROR_TIMEOUT;
-    uint32_t loopCnt = (uint32_t)10000;
+    int8_t   retval  = DHT11_ERROR_TIMEOUT;
+    uint16_t loopCnt = DHT11_PULSE_TIMEOUT;
     
-    uint32_t lng;
-    
-    while(digitalRead(pin) == LOW);
-    uint32_t t = micros();
-    while(digitalRead(pin) == HIGH);
-    lng = (uint16_t)(micros()-t);
-    retval = (lng > 40) ? 1 : 0;
-    printf("P: %lu %d\n", lng, retval);
+    while(digitalRead(pin) == LOW && loopCnt--);
+    if (loopCnt > 0) {
+        loopCnt = DHT11_PULSE_TIMEOUT;
+        uint32_t t = micros();
+        while(digitalRead(pin) == HIGH && loopCnt--);
+        if (loopCnt > 0) {
+            retval = ((micros()-t) > 40) ? 1 : 0;
+        }
+    }
     return retval;
 }
 
