@@ -57,7 +57,7 @@ int8_t dht11_read_val( uint8_t pin, uint8_t *humidity, uint8_t *celcius ) {
     delayMicroseconds(40);
     pinMode(pin, INPUT);
     
-    if ( dht11_get_pulse(pin) == DHT11_OK ) {       // got ackknowledgement?
+    if ( dht11_get_pulse(pin) >= 0 ) {       // got ackknowledgement?
         for (int i=0; i<40; i++) {                  // read 5 bites (40bits)
             retval=dht11_get_pulse(pin);
             if ( retval >= 0  ) {                   // timeout?
