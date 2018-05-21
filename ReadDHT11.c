@@ -81,7 +81,7 @@ int main(void)
                 int  count = 0;
                 while(count++ < MAX_TRIES && success == false)
                 {
-                    int humidity, celcius;
+                    uint8_t humidity, celcius;
                     if ( dht11_read_val( DHT11_PIN, &humidity, &celcius) == DHT11_OK ) {
                         sprintf(msg,"{\"Humidity\":\"%d\",\"Temperature\":\"%d\"}", humidity, celcius );
                         success=true;
