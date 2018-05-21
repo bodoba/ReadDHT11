@@ -36,7 +36,7 @@ int8_t dht11_get_pulse( uint8_t pin ) {
         while(digitalRead(pin) == HIGH && loopCnt--);
         if ( loopCnt > 0 ) {
             highcnt = loopCnt;
-            lng = (unit16_t)(micros()-t);
+            lng = (uint16_t)(micros()-t);
             
             retval = (lng > 40) ? 1 : 0;
         }
