@@ -30,9 +30,19 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAX_TIME  85
-#define DHT11_PIN 7
+#define DHT11_OK                 0
+#define DHT11_ERROR             -1
+#define DHT11_ERROR_CHECKSUM    -2
+#define DHT11_ERROR_TIMEOUT     -3
 
-bool dht11_read_val( int *humidity, int *celcius );
+int8_t dht11_read_val( uint8_t pin, uint8_t *humidity, uint8_t *celcius );
+// Input:
+//   pin      -> GPIO ping DHT11 sensor is connected to
+//
+// Output:
+//   humidity <- pointer to write humidity value to or NULL
+//   celcius  <- pointer to write celcius value to or NULL
+//
+// Return value: DHT11_OK on success, DHT11_ERROR_* on failure
 
 #endif /* DHT11_h */

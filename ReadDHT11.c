@@ -30,6 +30,9 @@
 #include "DHT11.h"
 #include "MQTT.h"
 
+
+#define DHT11_PIN 7
+
 /* 
  * ---------------------------------------------------------------------------------------
  * MQTT Broker to connect to
@@ -79,7 +82,7 @@ int main(void)
                 while(count++ < MAX_TRIES && success == false)
                 {
                     int humidity, celcius;
-                    if ( dht11_read_val( &humidity, &celcius) ) {
+                    if ( dht11_read_val( DHT11_PIN, &humidity, &celcius) == DHT11_OK ) {
                         sprintf(msg,"{\"Humidity\":\"%d\",\"Temperature\":\"%d\"}", humidity, celcius );
                         success=true;
                     } else {
