@@ -22,8 +22,6 @@
 
 #include "DHT11.h"
 
-#define DHT11_PULSE_TIMEOUT 10000
-
 int8_t dht11_get_pulse( uint8_t pin ) {
     int8_t   retval  = DHT11_ERROR_TIMEOUT;
     uint16_t loopCnt = DHT11_PULSE_TIMEOUT;

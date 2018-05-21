@@ -35,6 +35,9 @@
 #define DHT11_ERROR_CHECKSUM    -2
 #define DHT11_ERROR_TIMEOUT     -3
 
+#define DHT11_PULSE_TIMEOUT  10000
+
+
 int8_t dht11_read_val( uint8_t pin, uint8_t *humidity, uint8_t *celcius );
 // Input:
 //   pin      -> GPIO ping DHT11 sensor is connected to
