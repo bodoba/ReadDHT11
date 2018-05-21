@@ -39,7 +39,6 @@ int8_t dht11_get_pulse( uint8_t pin ) {
             retval = (pulse > 40) ? 1 : 0;
         }
     }
-//    printf("Pulse: %d -> %d\n", pulse, retval);
     return retval;
 }
 
@@ -57,14 +56,14 @@ int8_t dht11_read_val( uint8_t pin, uint8_t *humidity, uint8_t *celcius ) {
     delayMicroseconds(40);
     pinMode(pin, INPUT);
     
-    if ( dht11_get_pulse(pin) >= 0 ) {       // got ackknowledgement?
-        for (int i=0; i<40; i++) {                  // read 5 bites (40bits)
+    if ( dht11_get_pulse(pin) >= 0 ) {                     // got ackknowledgement?
+        for (int i=0; i<40; i++) {                         // read 5 bites (40bits)
             retval=dht11_get_pulse(pin);
-            if ( retval >= 0  ) {                   // timeout?
-                if ( retval > 0 ) bits[idx] |= (1 << cnt);
-                if (cnt == 0) {                     // next byte?
-                    cnt = 7;                        // restart at MSB
-                    idx++;                          // next byte!
+            if ( retval >= 0  ) {                          // timeout?
+                if ( retval > 0 ) bits[idx] |= (1 << cnt); // set bit
+                if (cnt == 0) {                            // next byte?
+                    cnt = 7;                               // restart at MSB
+                    idx++;                                 // next byte!
                 } else {
                     cnt--;
                 }
@@ -72,7 +71,7 @@ int8_t dht11_read_val( uint8_t pin, uint8_t *humidity, uint8_t *celcius ) {
                 return retval;
             }
         }
-        if ( bits[4] == (bits[0] + bits[2])) {      // calcutalate checksum
+        if ( bits[4] == (bits[0] + bits[2])) {             // calcutalate checksum
             if ( humidity ) *humidity = bits[0];
             if ( celcius )  *celcius  = bits[2];
             retval = DHT11_OK;
