@@ -24,14 +24,14 @@
 
 int8_t dht11_get_pulse( uint8_t pin ) {
     int8_t   retval = DHT11_ERROR_TIMEOUT;
-    uint16_t loopCnt = 10000;
+    uint16_t loopCnt = 100000;
     
     uint16_t lowcnt, highcnt;
     
     while(digitalRead(pin) == LOW && loopCnt--);
     if ( loopCnt > 0 ) {
         lowcnt = loopCnt;
-        loopCnt = 10000;
+        loopCnt = 100000;
         unsigned long t = micros();
         while(digitalRead(pin) == HIGH && loopCnt--);
         if ( loopCnt > 0 ) {
