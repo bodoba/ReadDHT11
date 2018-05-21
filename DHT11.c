@@ -23,7 +23,7 @@
 #include "DHT11.h"
 
 int8_t dht11_get_pulse( uint8_t pin ) {
-    int8_t   retval = DHT11_EROOR_TIMEOUT;
+    int8_t   retval = DHT11_ERROR_TIMEOUT;
     uint16_t loopCnt = 10000;
     
     while(digitalRead(pin) == LOW && loopCnt--);
